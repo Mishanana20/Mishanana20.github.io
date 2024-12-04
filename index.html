@@ -3,37 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Mini-App</title>
+    <title>Telegram Mini App - Кликер</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
+            background-color: #f7f7f7;
         }
+
+        #coin {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Bitcoin_logo_%28dark%29.svg/1200px-Bitcoin_logo_%28dark%29.svg.png') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        #counter {
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
         button {
-            padding: 10px 20px;
+            padding: 15px 30px;
             font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <h1>Добро пожаловать!</h1>
-    <p id="user-info">Загрузка данных...</p>
-    <button onclick="closeApp()">Закрыть приложение</button>
+    <h1>Добро пожаловать в Кликер!</h1>
+    <p id="counter">Кликов: 0</p>
+    <div id="coin"></div>
+    <button onclick="handleClick()">Кликни монетку!</button>
 
     <script>
         const tg = window.Telegram.WebApp;
 
-        // Получение данных о пользователе
         tg.ready();
-        const user = tg.initDataUnsafe.user;
-        document.getElementById("user-info").innerText = 
-            `Привет, ${user.first_name}!`;
+        
+        let clickCount = 0;
+        const coin = document.getElementById('coin');
+        const counter = document.getElementById('counter');
+        
+        function handleClick() {
+            // Увеличиваем счетчик кликов
+            clickCount++;
 
-        // Закрыть приложение
-        function closeApp() {
-            tg.close();
+            // Обновляем текст на экране
+            counter.innerText = `Кликов: ${clickCount}`;
+
+            // Анимация монеты (перемещение по экрану)
+            const randomX = Math.floor(Math.random() * window.innerWidth);
+            const randomY = Math.floor(Math.random() * window.innerHeight);
+
+            // Перемещаем монету случайным образом
+            coin.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+            // Закрытие приложения (опционально)
+            if (clickCount >= 10) {
+                setTimeout(() => {
+                    alert("Поздравляем, вы сделали 10 кликов!");
+                    tg.close(); // Закрытие приложения
+                }, 500);
+            }
         }
     </script>
 </body>
