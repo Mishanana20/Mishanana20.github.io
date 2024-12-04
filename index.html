@@ -91,8 +91,8 @@
             const windowHeight = window.innerHeight;
 
             // Ограничиваем случайные координаты так, чтобы монета оставалась в пределах экрана
-            const randomX = Math.floor(Math.random() * (windowWidth - 150));  // Учитываем ширину монеты
-            const randomY = Math.floor(Math.random() * (windowHeight - 20)); // Учитываем высоту монеты
+            const randomX = Math.floor(Math.random() * (windowWidth - 80));  // Учитываем ширину монеты
+            const randomY = Math.floor(Math.random() * (windowHeight + 100)); // Учитываем высоту монеты
 
             // Перемещаем монету случайным образом
             coin.style.transform = `translate(${randomX}px, ${randomY}px)`;
