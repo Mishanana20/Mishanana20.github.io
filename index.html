@@ -9,7 +9,7 @@
         body {
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Чтобы избежать прокрутки */
+            overflow: hidden;
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
             display: flex;
@@ -20,8 +20,8 @@
 
         #container {
             position: relative;
-            width: 80%;
-            height: 80%;
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -67,20 +67,19 @@
         <h1>Добро пожаловать в Кликер!</h1>
         <p id="counter">Кликов: 0</p>
         <div id="coin"></div>
-        <button onclick="handleClick()">Кликни монетку!</button>
+        <button id="clickButton">Кликни монетку!</button>
     </div>
 
     <script>
         const tg = window.Telegram.WebApp;
-        
         tg.ready();
+        
         let clickCount = 0;
         const coin = document.getElementById('coin');
         const counter = document.getElementById('counter');
-        function getRandomArbitrary(min, max) {
-  return Math.random() * (max - min) + min;
-}
-        
+        const clickButton = document.getElementById('clickButton');
+
+        // Функция для обработки кликов
         function handleClick() {
             // Увеличиваем счетчик кликов
             clickCount++;
@@ -93,8 +92,8 @@
             const windowHeight = window.innerHeight;
 
             // Ограничиваем случайные координаты так, чтобы монета оставалась в пределах экрана
-            const randomX = Math.floor(Math.getRandomArbitrary(-30, 30);  // Учитываем ширину монеты
-            const randomY = Math.floor(Math.getRandomArbitrary(-30, 30); // Учитываем высоту монеты
+            const randomX = Math.floor(Math.random() * (windowWidth - 50));  // Учитываем ширину монеты
+            const randomY = Math.floor(Math.random() * (windowHeight - 50)); // Учитываем высоту монеты
 
             // Перемещаем монету случайным образом
             coin.style.transform = `translate(${randomX}px, ${randomY}px)`;
@@ -107,6 +106,12 @@
                 }, 500);
             }
         }
+
+        // Обработка клика на ПК
+        clickButton.addEventListener('click', handleClick);
+
+        // Обработка кликов на мобильных устройствах
+        coin.addEventListener('touchstart', handleClick);
     </script>
 </body>
 </html>
