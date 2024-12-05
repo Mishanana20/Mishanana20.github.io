@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статья</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        #container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .article-content img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="content"></div>
+        <a href="index.html" class="back-link">Назад на главную</a>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = parseInt(params.get("id"));
+
+        const articles = [
+            { 
+                id: 1, 
+                title: "Как заработать первые монетки", 
+                content: "В этой статье вы узнаете, как начать зарабатывать монетки..." 
+            },
+            { 
+                id: 2, 
+                title: "Лучшие стратегии для клика", 
+                content: "В статье описаны стратегии для увеличения дохода..." 
+            },
+            { 
+                id: 3, 
+                title: "Секреты сундуков", 
+                content: "Хотите узнать, что скрывают сундуки? Читайте здесь..." 
+            },
+        ];
+
+        const article = articles.find(a => a.id === id);
+        if (article) {
+            document.getElementById("content").innerHTML = `
+                <h1>${article.title}</h1>
+                <p>${article.content}</p>
+            `;
+        } else {
+            document.getElementById("content").innerHTML = `<p>Статья не найдена.</p>`;
+        }
+    </script>
+</body>
+</html>

@@ -3,115 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Mini App - Кликер</title>
+    <title>Кликер с сундуками</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        #container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-        }
-
-        #coin {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background: url('https://github.com/Mishanana20/Mishanana20.github.io/blob/main/coinimagetest.png?raw=true') no-repeat center center;
-            background-size: cover;
-            border-radius: 50%;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        #counter {
-            font-size: 32px;
-            margin-bottom: 30px;
+            background-color: #f4f4f9;
             color: #333;
         }
 
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
+        header {
             background-color: #4CAF50;
             color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s;
+            padding: 15px 20px;
+            text-align: center;
         }
 
-        button:hover {
-            background-color: #45a049;
+        #container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header .balance {
+            font-size: 18px;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .article-list .article {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+            overflow: hidden;
+        }
+
+        .article img {
+            width: 100%;
+            height: auto;
+        }
+
+        .article h2 {
+            margin: 10px 15px;
+            font-size: 20px;
+        }
+
+        .article a {
+            display: block;
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+            margin: 10px 15px 15px;
+            text-align: right;
+        }
+
+        .chest {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .chest img {
+            width: 100px;
+            cursor: pointer;
+        }
+
+        .chest img:hover {
+            transform: scale(1.1);
+            transition: 0.3s;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 10px;
+            font-size: 14px;
+            color: #777;
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Кликер с сундуками</h1>
+    </header>
     <div id="container">
-        <h1>Добро пожаловать в Кликер!</h1>
-        <p id="counter">Кликов: 0</p>
-        <div id="coin"></div>
-        <button id="clickButton">Кликни монетку!</button>
+        <div class="header">
+            <h1>Главная страница</h1>
+            <div class="balance">Монеток: <span id="balance">0</span></div>
+        </div>
+        <div class="article-list" id="articles">
+            <!-- Статьи будут добавлены через JS -->
+        </div>
+        <div class="chest">
+            <h2>Открой сундук (10 монет)</h2>
+            <img id="chest" src="https://example.com/chest.png" alt="Сундук">
+        </div>
     </div>
+    <footer>
+        © 2024, Ваше приложение
+    </footer>
 
-    <script>
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-        
-        let clickCount = 0;
-        const coin = document.getElementById('coin');
-        const counter = document.getElementById('counter');
-        const clickButton = document.getElementById('clickButton');
-
-        // Функция для обработки кликов
-        function handleClick() {
-            // Увеличиваем счетчик кликов
-            clickCount++;
-
-            // Обновляем текст на экране
-            counter.innerText = `Кликов: ${clickCount}`;
-
-            // Анимация монеты (перемещение по экрану)
-            const windowWidth = window.innerWidth;
-            const windowHeight = window.innerHeight;
-
-            // Ограничиваем случайные координаты так, чтобы монета оставалась в пределах экрана
-            const randomX = Math.floor(Math.random() * (windowWidth - 50));  // Учитываем ширину монеты
-            const randomY = Math.floor(Math.random() * (windowHeight - 50)); // Учитываем высоту монеты
-
-            // Перемещаем монету случайным образом
-            coin.style.transform = `translate(${randomX}px, ${randomY}px)`;
-
-            // Закрытие приложения (опционально)
-            if (clickCount >= 10) {
-                setTimeout(() => {
-                    alert("Поздравляем, вы сделали 10 кликов!");
-                    tg.close(); // Закрытие приложения
-                }, 500);
-            }
-        }
-
-        // Обработка клика на ПК
-        clickButton.addEventListener('click', handleClick);
-
-        // Обработка кликов на мобильных устройствах
-        coin.addEventListener('touchstart', handleClick);
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
