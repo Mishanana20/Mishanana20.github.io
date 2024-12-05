@@ -2,14 +2,14 @@ const articles = [
     { 
         id: 1, 
         title: "Как заработать первые монетки", 
-        image: "https://example.com/article1.png", 
+        image: "https://github.com/Mishanana20/Mishanana20.github.io/blob/main/coinimagetest.png?raw=true", 
         content: "В этой статье вы узнаете, как начать зарабатывать монетки...",
         reward: 5 
     },
     { 
         id: 2, 
         title: "Лучшие стратегии для клика", 
-        image: "https://example.com/article2.png", 
+        image: "https://github.com/Mishanana20/Mishanana20.github.io/blob/main/ithinkimage.jpg?raw=true", 
         content: "В статье описаны стратегии для увеличения дохода...",
         reward: 10 
     },
