@@ -51,6 +51,7 @@ articles.forEach(article => {
         <img src="${article.image}" alt="${article.title}">
         <h2>${article.title}</h2>
         <a href="article.html?id=${article.id}" class="read-link">Читать статью</a>
+        <button onclick="readArticle(1)">Прочитать</button>
     `;
     articlesContainer.appendChild(articleElement);
 });
