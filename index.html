@@ -19,15 +19,8 @@
 
         <section id="articles">
             <h2>Статьи</h2>
-            <div class="article">
-                <h3>Статья 1</h3>
-                <p>Интересное содержание статьи.</p>
-                <button onclick="readArticle(1)">Прочитать</button>
-            </div>
-            <div class="article">
-                <h3>Статья 2</h3>
-                <p>Еще одна захватывающая статья.</p>
-                <button onclick="readArticle(2)">Прочитать</button>
+            <div class="article-list" id="articles">
+                <!-- Статьи будут добавлены через JS -->
             </div>
         </section>
 
@@ -41,12 +34,16 @@
 
         <section id="chests">
             <h2>Сундучки</h2>
+            <h2>Открой сундук (10 монет)</h2>
+            <img id="chest" src="https://github.com/Mishanana20/Mishanana20.github.io/blob/main/coinbox.png?raw=true" alt="Сундук">
             <p>Откройте сундук за монетки!</p>
             <button onclick="openChest()">Открыть сундук</button>
             <div id="chest-result"></div>
         </section>
     </div>
-
+    <footer>
+        © 2024, Ваше приложение
+    </footer>
     <script src="scripts.js"></script>
 </body>
 </html>
