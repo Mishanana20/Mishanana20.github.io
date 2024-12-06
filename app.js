@@ -1,56 +1,43 @@
-const articles = [
-    { 
-        id: 1, 
-        title: "Как заработать первые монетки", 
-        image: "https://github.com/Mishanana20/Mishanana20.github.io/blob/main/coinimagetest.png?raw=true", 
-        content: "В этой статье вы узнаете, как начать зарабатывать монетки...",
-        reward: 5 
-    },
-    { 
-        id: 2, 
-        title: "Лучшие стратегии для клика", 
-        image: "https://github.com/Mishanana20/Mishanana20.github.io/blob/main/ithinkimage.jpg?raw=true", 
-        content: "В статье описаны стратегии для увеличения дохода...",
-        reward: 10 
-    },
-    { 
-        id: 3, 
-        title: "Секреты сундуков", 
-        image: "https://example.com/article3.png", 
-        content: "Хотите узнать, что скрывают сундуки? Читайте здесь...",
-        reward: 8 
-    },
-];
+let balance = parseInt(localStorage.getItem("balance")) || 0;
 
-let balance = localStorage.getItem("balance") || 0;
-let readArticles = JSON.parse(localStorage.getItem("readArticles")) || [];
+function updateBalance(amount) {
+    balance += amount;
+    balance = Math.max(0, balance); // Не позволяем уйти в минус
+    localStorage.setItem("balance", balance);
+    balanceElement.textContent = balance;
+}
+const readArticles = JSON.parse(localStorage.getItem("readArticles")) || [];
 
-const balanceElement = document.getElementById("balance");
-const articlesContainer = document.getElementById("articles");
-const chest = document.getElementById("chest");
-
-balanceElement.textContent = balance;
-
-// Отобразить список статей
 articles.forEach(article => {
     const articleElement = document.createElement("div");
     articleElement.classList.add("article");
     articleElement.innerHTML = `
         <img src="${article.image}" alt="${article.title}">
         <h2>${article.title}</h2>
-        <a href="article.html?id=${article.id}" class="read-link">Читать статью</a>
+        <a href="#" class="read-link" data-id="${article.id}">Читать статью</a>
     `;
     articlesContainer.appendChild(articleElement);
 });
 
-// Обработчик для сундука
+articlesContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("read-link")) {
+        e.preventDefault();
+        const articleId = parseInt(e.target.dataset.id);
+        if (!readArticles.includes(articleId)) {
+            readArticles.push(articleId);
+            localStorage.setItem("readArticles", JSON.stringify(readArticles));
+            const reward = articles.find(article => article.id === articleId).reward;
+            updateBalance(reward);
+            alert(`Вы получили ${reward} монет за прочтение статьи!`);
+        } else {
+            alert("Вы уже получили монеты за эту статью.");
+        }
+    }
+});
 chest.addEventListener("click", () => {
     if (balance >= 10) {
-        balance -= 10;
-        balanceElement.textContent = balance;
-        localStorage.setItem("balance", balance);
+        updateBalance(-10);
 
-        // Случайное изображение из сундука
         const rewards = [
             "https://example.com/reward1.png",
             "https://example.com/reward2.png",

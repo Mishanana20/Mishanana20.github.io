@@ -3,120 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кликер с сундуками</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 20px;
-            text-align: center;
-        }
-
-        #container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-
-        .header .balance {
-            font-size: 18px;
-            color: #4CAF50;
-            font-weight: bold;
-        }
-
-        .article-list .article {
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background: white;
-            overflow: hidden;
-        }
-
-        .article img {
-            width: 100%;
-            height: auto;
-        }
-
-        .article h2 {
-            margin: 10px 15px;
-            font-size: 20px;
-        }
-
-        .article a {
-            display: block;
-            text-decoration: none;
-            color: #4CAF50;
-            font-weight: bold;
-            margin: 10px 15px 15px;
-            text-align: right;
-        }
-
-        .chest {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .chest img {
-            width: 100px;
-            cursor: pointer;
-        }
-
-        .chest img:hover {
-            transform: scale(1.1);
-            transition: 0.3s;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 10px;
-            font-size: 14px;
-            color: #777;
-        }
-    </style>
+    <title>Кликер и статьи</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Кликер с сундуками</h1>
-    </header>
-    <div id="container">
-        <div class="header">
-            <h1>Главная страница</h1>
-            <div class="balance">Монеток: <span id="balance">0</span></div>
-        </div>
-        <div class="article-list" id="articles">
-            <!-- Статьи будут добавлены через JS -->
-        </div>
-        <div class="chest">
-            <h2>Открой сундук (10 монет)</h2>
-            <img id="chest" src="https://github.com/Mishanana20/Mishanana20.github.io/blob/main/coinbox.png?raw=true" alt="Сундук">
-        </div>
-    </div>
-    <footer>
-        © 2024, Ваше приложение
-    </footer>
+    <div class="container">
+        <header>
+            <h1>Добро пожаловать в наше приложение!</h1>
+            <nav>
+                <a href="#articles">Статьи</a>
+                <a href="#clicker">Кликер</a>
+                <a href="#chests">Сундучки</a>
+            </nav>
+        </header>
 
-    <script src="app.js"></script>
+        <section id="articles">
+            <h2>Статьи</h2>
+            <div class="article">
+                <h3>Статья 1</h3>
+                <p>Интересное содержание статьи.</p>
+                <button onclick="readArticle(1)">Прочитать</button>
+            </div>
+            <div class="article">
+                <h3>Статья 2</h3>
+                <p>Еще одна захватывающая статья.</p>
+                <button onclick="readArticle(2)">Прочитать</button>
+            </div>
+        </section>
+
+        <section id="clicker">
+            <h2>Кликер</h2>
+            <div id="coin-container">
+                <button id="coin-button" onclick="addCoin()">💰</button>
+            </div>
+            <p>Ваши монетки: <span id="coin-count">0</span></p>
+        </section>
+
+        <section id="chests">
+            <h2>Сундучки</h2>
+            <p>Откройте сундук за монетки!</p>
+            <button onclick="openChest()">Открыть сундук</button>
+            <div id="chest-result"></div>
+        </section>
+    </div>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
