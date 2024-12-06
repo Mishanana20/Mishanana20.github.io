@@ -21,10 +21,7 @@ const articles = [
     { 
         id: 2, 
         title: "Лучшие стратегии для клика", 
-        image: "...raw=true
-
-
-https://github.com/Mishanana20/Mishanana20.github.io/blob/main/ithinkimage.jpg?raw=true", 
+        image: "https://github.com/Mishanana20/Mishanana20.github.io/blob/main/ithinkimage.jpg?raw=true", 
         content: "В статье описаны стратегии для увеличения дохода...",
         reward: 10 
     },
