@@ -1,3 +1,5 @@
+<script src="https://telegram.org/js/telegram-web-app.js"></script> 
+
 let balance = parseInt(localStorage.getItem("balance")) || 0;
 
 function updateBalance(amount) {
