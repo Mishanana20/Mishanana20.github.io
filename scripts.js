@@ -1,3 +1,4 @@
+<script src="https://telegram.org/js/telegram-web-app.js"></script> 
 let coinCount = 0;
 
 
